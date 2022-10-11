@@ -32,6 +32,46 @@ class MainActivity : AppCompatActivity() {
         displayForTeamB(mViewModel.scoreTeamB)
     }
 
+    fun addThreeForTeamA(mViewModel: ScoreViewModel){
+        mViewModel.scoreTeamA += 3
+        displayForTeamA(mViewModel.scoreTeamA)
+    }
+
+    fun addThreeForTeamB(mViewModel: ScoreViewModel){
+        mViewModel.scoreTeamB += 3
+        displayForTeamB(mViewModel.scoreTeamB)
+    }
+
+    fun addSixForTeamA(mViewModel: ScoreViewModel){
+        mViewModel.scoreTeamA += 6
+        displayForTeamA(mViewModel.scoreTeamA)
+    }
+
+    fun addSixForTeamB(mViewModel: ScoreViewModel){
+        mViewModel.scoreTeamB += 6
+        displayForTeamB(mViewModel.scoreTeamB)
+    }
+
+    fun addNineForTeamA(mViewModel: ScoreViewModel){
+        mViewModel.scoreTeamA += 9
+        displayForTeamA(mViewModel.scoreTeamA)
+    }
+
+    fun addNineForTeamB(mViewModel: ScoreViewModel){
+        mViewModel.scoreTeamB += 9
+        displayForTeamB(mViewModel.scoreTeamB)
+    }
+
+    fun addTwelveForTeamA(mViewModel: ScoreViewModel){
+        mViewModel.scoreTeamA += 12
+        displayForTeamA(mViewModel.scoreTeamA)
+    }
+
+    fun addTwelveForTeamB(mViewModel: ScoreViewModel) {
+        mViewModel.scoreTeamB += 12
+        displayForTeamB(mViewModel.scoreTeamB)
+    }
+
     fun resetScore(mViewModel: ScoreViewModel) {
         mViewModel.scoreTeamA = 0
         mViewModel.scoreTeamB = 0
@@ -58,6 +98,38 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnReset.setOnClickListener {
             resetScore(mViewModel)
+        }
+
+        binding.btnAddThreeA.setOnClickListener {
+            addThreeForTeamA(mViewModel)
+        }
+
+        binding.btnAddThreeB.setOnClickListener {
+            addThreeForTeamB(mViewModel)
+        }
+
+        binding.btnAddSixA.setOnClickListener{
+            addSixForTeamA(mViewModel)
+        }
+
+        binding.btnAddSixB.setOnClickListener {
+            addSixForTeamB(mViewModel)
+        }
+
+        binding.btnAddNineA.setOnClickListener {
+            addNineForTeamA(mViewModel)
+        }
+
+        binding.btnAddNineB.setOnClickListener {
+            addNineForTeamB(mViewModel)
+        }
+
+        binding.btnAddTwelveA.setOnClickListener {
+            addTwelveForTeamA(mViewModel)
+        }
+
+        binding.btnAddTwelveB.setOnClickListener {
+            addTwelveForTeamB(mViewModel)
         }
     }
 }

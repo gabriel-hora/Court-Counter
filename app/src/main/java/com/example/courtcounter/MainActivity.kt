@@ -2,10 +2,9 @@ package com.example.courtcounter
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.example.courtcounter.databinding.ActivityMainBinding
-import com.example.courtcounter.viewModel.ScoreViewModel
+import com.example.courtcounter.viewModel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,120 +15,62 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        val mViewModel = ViewModelProvider(this)[ScoreViewModel::class.java]
-        displayForTeamA(mViewModel.scoreTeamA)
-        displayForTeamB(mViewModel.scoreTeamB)
-        onClickButton(mViewModel)
+
+        val mViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+        mViewModel.valueScoreALiveData.observe(this) { value ->
+            binding.scoreTeamA.text = value.toString()
+        }
+
+        mViewModel.valueScoreBLiveData.observe(this) { value ->
+            binding.scoreTeamB.text = value.toString()
+        }
+
+        onClickScoreA(mViewModel)
+        onClickScoreB(mViewModel)
     }
 
-    fun addOneForTeamA(mViewModel: ScoreViewModel) {
-        mViewModel.scoreTeamA += 1
-        displayForTeamA(mViewModel.scoreTeamA)
-    }
-
-    fun addOneForTeamB(mViewModel: ScoreViewModel) {
-        mViewModel.scoreTeamB += 1
-        displayForTeamB(mViewModel.scoreTeamB)
-    }
-
-    fun addThreeForTeamA(mViewModel: ScoreViewModel){
-        mViewModel.scoreTeamA += 3
-        displayForTeamA(mViewModel.scoreTeamA)
-    }
-
-    fun addThreeForTeamB(mViewModel: ScoreViewModel){
-        mViewModel.scoreTeamB += 3
-        displayForTeamB(mViewModel.scoreTeamB)
-    }
-
-    fun addSixForTeamA(mViewModel: ScoreViewModel){
-        mViewModel.scoreTeamA += 6
-        displayForTeamA(mViewModel.scoreTeamA)
-    }
-
-    fun addSixForTeamB(mViewModel: ScoreViewModel){
-        mViewModel.scoreTeamB += 6
-        displayForTeamB(mViewModel.scoreTeamB)
-    }
-
-    fun addNineForTeamA(mViewModel: ScoreViewModel){
-        mViewModel.scoreTeamA += 9
-        displayForTeamA(mViewModel.scoreTeamA)
-    }
-
-    fun addNineForTeamB(mViewModel: ScoreViewModel){
-        mViewModel.scoreTeamB += 9
-        displayForTeamB(mViewModel.scoreTeamB)
-    }
-
-    fun addTwelveForTeamA(mViewModel: ScoreViewModel){
-        mViewModel.scoreTeamA += 12
-        displayForTeamA(mViewModel.scoreTeamA)
-    }
-
-    fun addTwelveForTeamB(mViewModel: ScoreViewModel) {
-        mViewModel.scoreTeamB += 12
-        displayForTeamB(mViewModel.scoreTeamB)
-    }
-
-    fun resetScore(mViewModel: ScoreViewModel) {
-        mViewModel.scoreTeamA = 0
-        mViewModel.scoreTeamB = 0
-        displayForTeamA(mViewModel.scoreTeamA)
-        displayForTeamB(mViewModel.scoreTeamB)
-    }
-
-    fun displayForTeamA(scoreForTeamA: Int){
-        binding.scoreTeamA.text = scoreForTeamA.toString()
-    }
-
-    fun displayForTeamB(scoreForTeamB: Int){
-        binding.scoreTeamB.text = scoreForTeamB.toString()
-    }
-
-    fun onClickButton(mViewModel: ScoreViewModel){
+    private fun onClickScoreA(mViewModel: MainViewModel) {
         binding.btnAddOneA.setOnClickListener {
-            addOneForTeamA(mViewModel)
-        }
-
-        binding.btnAddOneB.setOnClickListener {
-            addOneForTeamB(mViewModel)
-        }
-
-        binding.btnReset.setOnClickListener {
-            resetScore(mViewModel)
+            mViewModel.addOneForTeamA()
         }
 
         binding.btnAddThreeA.setOnClickListener {
-            addThreeForTeamA(mViewModel)
+            mViewModel.addThreeForTeamA()
         }
 
-        binding.btnAddThreeB.setOnClickListener {
-            addThreeForTeamB(mViewModel)
-        }
-
-        binding.btnAddSixA.setOnClickListener{
-            addSixForTeamA(mViewModel)
-        }
-
-        binding.btnAddSixB.setOnClickListener {
-            addSixForTeamB(mViewModel)
+        binding.btnAddSixA.setOnClickListener {
+            mViewModel.addSixForTeamA()
         }
 
         binding.btnAddNineA.setOnClickListener {
-            addNineForTeamA(mViewModel)
-        }
-
-        binding.btnAddNineB.setOnClickListener {
-            addNineForTeamB(mViewModel)
+            mViewModel.addNineForTeamA()
         }
 
         binding.btnAddTwelveA.setOnClickListener {
-            addTwelveForTeamA(mViewModel)
+            mViewModel.addTwelveForTeamA()
+        }
+    }
+
+    private fun onClickScoreB(mViewModel: MainViewModel) {
+        binding.btnAddOneB.setOnClickListener {
+            mViewModel.addOneForTeamB()
+        }
+
+        binding.btnAddThreeB.setOnClickListener {
+            mViewModel.addThreeForTeamB()
+        }
+
+        binding.btnAddSixB.setOnClickListener {
+            mViewModel.addSixForTeamB()
+        }
+
+        binding.btnAddNineB.setOnClickListener {
+            mViewModel.addNineForTeamB()
         }
 
         binding.btnAddTwelveB.setOnClickListener {
-            addTwelveForTeamB(mViewModel)
+            mViewModel.addTwelveForTeamB()
         }
     }
 }
